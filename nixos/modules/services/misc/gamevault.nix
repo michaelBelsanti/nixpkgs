@@ -39,29 +39,58 @@ in {
           Open Gamevaults default ports in the firewall.
         '';
       };
+      
+      rawg = {
+        enable = mkEnableOption (lib.mdDoc "Enable RAWG api integration.");
+        apiKey = mkOption {
+          
+        };
+      };
     };
   };
 
   config = mkIf cfg.enable {
     systemd.services.gamevault = {
-      description = "Backend for the self-hosted gaming platform for alternatively obtained' games";
+      description = "Backend for the self-hosted gaming platform for alternatively obtained games";
       after = ["network.target"];
       wantedBy = ["multi-user.target"];
     };
 
-    users.users = mkIf (cfg.user == "gamevault") {
-      gamevault = {
-        group = cfg.group;
-        isSystemUser = true;
-      };
+    users.users.${cfg.user} = {
+      group = cfg.group;
+      isSystemUser = mkIf (cfg.enable) true;
     };
 
-    users.groups = mkIf (cfg.group == "gamevault") {
-      gamevault = {};
-    };
+    users.groups.${cfg.group}.= {};
 
     networking.firewall = mkIf cfg.openFirewall {
       allowedTCPPorts = [8080];
+    };
+
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = [ "nextcloud" ];
+      ensureUsers = [{
+        name = ${cfg.user};
+        ensurePermissions = { "DATABASE nextcloud" = "ALL PRIVILEGES"; };
+      }];
+    };
+
+    systemd.services.gamevault = {
+      enable = true;
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.gamevault}/bin/gamevault";
+        User = cfg.user;
+        Group = cfg.group;
+      };
+      environment = {
+        DB_HOST = "localhost";
+        DB_USERNAME = "gamevault";
+        SERVER_ADMIN_USERNAME = "admin";
+        RAWG_API_KEY = mkIf (cfg.rawg.enable) "${cfg.rawg.apiKey}"
+      };
     };
   };
 
