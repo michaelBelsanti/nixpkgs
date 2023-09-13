@@ -27,30 +27,6 @@ let
     Xft.hintstyle: ${fontconfig.hinting.style}
   '';
 
-  # FIXME: this is an ugly hack.
-  # Some sessions (read: most WMs) don't activate systemd's `graphical-session.target`.
-  # Other sessions (read: most non-WMs) expect `graphical-session.target` to be reached
-  # when the entire session is actually ready. We used to just unconditionally force
-  # `graphical-session.target` to be activated in the session wrapper so things like
-  # xdg-autostart-generator work on sessions that are wrong, but this broke sessions
-  # that do things right. So, preserve this behavior (with some extra steps) by matching
-  # on XDG_CURRENT_DESKTOP and deliberately ignoring sessions we know can do the right thing.
-  fakeSession = action: ''
-      session_is_systemd_aware=$(
-        IFS=:
-        for i in $XDG_CURRENT_DESKTOP; do
-          case $i in
-            KDE|GNOME|X-NIXOS-SYSTEMD-AWARE) echo "1"; exit; ;;
-            *) ;;
-          esac
-        done
-      )
-
-      if [ -z "$session_is_systemd_aware" ]; then
-        /run/current-system/systemd/bin/systemctl --user ${action} nixos-fake-graphical-session.target
-      fi
-  '';
-
   # file provided by services.xserver.displayManager.sessionData.wrapper
   xsessionWrapper = pkgs.writeScript "xsession-wrapper"
     ''
@@ -114,7 +90,8 @@ let
 
       ${cfg.displayManager.sessionCommands}
 
-      ${fakeSession "start"}
+      # Start systemd user services for graphical sessions
+      /run/current-system/systemd/bin/systemctl --user start graphical-session.target
 
       # Allow the user to setup a custom session type.
       if test -x ~/.xsession; then
@@ -440,10 +417,10 @@ in
       "XDG_SESSION_ID"
     ];
 
-    systemd.user.targets.nixos-fake-graphical-session = {
+    systemd.user.targets.graphical-session = {
       unitConfig = {
-        Description = "Fake graphical-session target for non-systemd-aware sessions";
-        BindsTo = "graphical-session.target";
+        RefuseManualStart = false;
+        StopWhenUnneeded = false;
       };
     };
 
@@ -474,7 +451,7 @@ in
 
           test -n "$waitPID" && wait "$waitPID"
 
-          ${fakeSession "stop"}
+          /run/current-system/systemd/bin/systemctl --user stop graphical-session.target
 
           exit 0
         '';
