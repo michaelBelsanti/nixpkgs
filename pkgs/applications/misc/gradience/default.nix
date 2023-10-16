@@ -26,11 +26,11 @@ python3Packages.buildPythonApplication rec {
   version = "0.4.1";
 
   src = fetchFromGitHub {
-    owner = "GradienceTeam";
+    owner = "michaelBelsanti";
     repo = "Gradience";
-    # See https://github.com/GradienceTeam/Gradience/releases/tag/0.4.1-patch1
-    rev = "0.4.1-patch1";
-    sha256 = "sha256-5jloFbimJC4jP1C1uS8a9VlqyR5qqDuqcKvUXwr9SjY=";
+    rev = "31b8bd7f758060d17f6810340793378638552252";
+    hash = "sha256-z4S6QF8WGZPSsuYCEZ9TbfkaPaHSJo29K0t9MinsgWI=";
+    fetchSubmodules = true;
   };
 
   format = "other";
@@ -67,6 +67,7 @@ python3Packages.buildPythonApplication rec {
     pygobject3
     svglib
     yapsy
+    libsass
   ];
 
   preFixup = ''
