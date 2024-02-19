@@ -16005,7 +16005,7 @@ with pkgs;
     inherit (gnome2) libart_lgpl;
   });
 
-  gnat = gnat12;
+  gnat = gnat12; # When changing this, update also gnatPackages
 
   gnat11 = wrapCC (gcc11.cc.override {
     name = "gnat";
@@ -16077,7 +16077,10 @@ with pkgs;
     bintools = bintoolsDualAs;
   });
 
-  gnatPackages   = recurseIntoAttrs (callPackage ./ada-packages.nix { gnat = buildPackages.gnat; });
+  gnat12Packages = recurseIntoAttrs (callPackage ./ada-packages.nix { gnat = buildPackages.gnat12; });
+  gnat13Packages = recurseIntoAttrs (callPackage ./ada-packages.nix { gnat = buildPackages.gnat13; });
+  gnatPackages   = gnat12Packages;
+
   inherit (gnatPackages)
     gprbuild
     gnatprove;
