@@ -16077,6 +16077,10 @@ with pkgs;
     bintools = bintoolsDualAs;
   });
 
+  gnatprove = callPackage ../development/libraries/ada/gnatprove {
+    ocamlPackages = ocaml-ng.ocamlPackages_4_14;
+  };
+
   gnu-smalltalk = callPackage ../development/compilers/gnu-smalltalk { };
 
   gccgo = wrapCC (gcc.cc.override {
@@ -17931,10 +17935,6 @@ with pkgs;
   spark = spark3;
 
   sparkleshare = callPackage ../applications/version-management/sparkleshare { };
-
-  spark2014 = callPackage ../development/libraries/ada/spark2014 {
-    ocamlPackages = ocaml-ng.ocamlPackages_4_14;
-  };
 
   spidermonkey_78 = callPackage ../development/interpreters/spidermonkey/78.nix {
     inherit (darwin) libobjc;
