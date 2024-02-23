@@ -31055,7 +31055,9 @@ with pkgs;
 
   edlin = callPackage ../applications/editors/edlin { };
 
-  orbiton = callPackage ../applications/editors/orbiton { };
+  orbiton = callPackage ../applications/editors/orbiton {
+    buildGoModule = buildGo122Module;
+  };
 
   oed = callPackage ../applications/editors/oed { };
 
