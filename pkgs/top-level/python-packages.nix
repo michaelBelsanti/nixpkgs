@@ -6674,6 +6674,8 @@ self: super: with self; {
 
   llama-index-core = callPackage ../development/python-modules/llama-index-core { };
 
+  llama-index-llms-openai = callPackage ../development/python-modules/llama-index-llms-openai { };
+
   llama-index-readers-file = callPackage ../development/python-modules/llama-index-readers-file { };
 
   llama-index-readers-llama-parse = callPackage ../development/python-modules/llama-index-readers-llama-parse { };
