@@ -3554,8 +3554,6 @@ with pkgs;
 
   biscuit-cli = callPackage ../tools/security/biscuit-cli { };
 
-  bitwarden = callPackage ../tools/security/bitwarden { };
-
   bitwarden-cli = callPackage ../tools/security/bitwarden/cli.nix { };
 
   inherit (callPackages ../tools/security/bitwarden-directory-connector { }) bitwarden-directory-connector-cli bitwarden-directory-connector;
