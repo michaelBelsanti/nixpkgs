@@ -3554,8 +3554,6 @@ with pkgs;
 
   biscuit-cli = callPackage ../tools/security/biscuit-cli { };
 
-  bitwarden-cli = callPackage ../tools/security/bitwarden/cli.nix { };
-
   inherit (callPackages ../tools/security/bitwarden-directory-connector { }) bitwarden-directory-connector-cli bitwarden-directory-connector;
 
   bitwarden-menu = python3Packages.callPackage ../applications/misc/bitwarden-menu { };
