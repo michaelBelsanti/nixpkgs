@@ -7,18 +7,25 @@
 
 let
   cfg = config.programs.appimage;
+  appimagerunPackage = (pkgs.appimage-run.override {
+    extraPkgs = cfg.extraPackages;
+  });
 in
 
 {
   options.programs.appimage = {
     enable = lib.mkEnableOption "appimage-run wrapper script for executing appimages on NixOS";
     binfmt = lib.mkEnableOption "binfmt registration to run appimages via appimage-run seamlessly";
-    package = lib.mkPackageOption pkgs "appimage-run" {
-      example = ''
-        pkgs.appimage-run.override {
-          extraPkgs = pkgs: [ pkgs.ffmpeg pkgs.imagemagick ];
-        }
-      '';
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = appimagerunPackage;
+      description = "The appimage-run package to use.";
+    };
+    extraPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [ ];
+      description = "Additional packages to add to the appimage-run environment.";
+      example = "with pkgs; [ ffmpeg imagemagick ]";
     };
   };
 
