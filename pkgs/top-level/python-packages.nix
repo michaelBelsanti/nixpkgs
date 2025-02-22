@@ -894,6 +894,8 @@ self: super: with self; {
 
   assay = callPackage ../development/python-modules/assay { };
 
+  asserts = callPackage ../development/python-modules/asserts { };
+
   assertpy = callPackage ../development/python-modules/assertpy { };
 
   asterisk-mbox = callPackage ../development/python-modules/asterisk-mbox { };
@@ -1935,6 +1937,8 @@ self: super: with self; {
   brottsplatskartan = callPackage ../development/python-modules/brottsplatskartan { };
 
   browser-cookie3 = callPackage ../development/python-modules/browser-cookie3 { };
+
+  browserforge = callPackage ../development/python-modules/browserforge { };
 
   brunt = callPackage ../development/python-modules/brunt { };
 
@@ -6060,6 +6064,8 @@ self: super: with self; {
 
   htmldate = callPackage ../development/python-modules/htmldate { };
 
+  htmlgen = callPackage ../development/python-modules/htmlgen { };
+
   htmllistparse = callPackage ../development/python-modules/htmllistparse { };
 
   htmlmin = callPackage ../development/python-modules/htmlmin { };
@@ -8111,6 +8117,7 @@ self: super: with self; {
   mdformat-simple-breaks = callPackage ../development/python-modules/mdformat-simple-breaks { };
   mdformat-tables = callPackage ../development/python-modules/mdformat-tables { };
   mdformat-toc = callPackage ../development/python-modules/mdformat-toc { };
+  mdformat-wikilink = callPackage ../development/python-modules/mdformat-wikilink { };
 
   mdit-py-plugins = callPackage ../development/python-modules/mdit-py-plugins { };
 
@@ -9614,6 +9621,8 @@ self: super: with self; {
   py-opensonic = callPackage ../development/python-modules/py-opensonic { };
 
   py-radix-sr = callPackage ../development/python-modules/py-radix-sr { };
+
+  py-rust-stemmers = callPackage ../development/python-modules/py-rust-stemmers { };
 
   py-sucks = callPackage ../development/python-modules/py-sucks { };
 
@@ -12802,6 +12811,8 @@ self: super: with self; {
   pysigma-backend-sqlite = callPackage ../development/python-modules/pysigma-backend-sqlite { };
 
   pysigma-backend-insightidr = callPackage ../development/python-modules/pysigma-backend-insightidr { };
+
+  pysigma-backend-loki = callPackage ../development/python-modules/pysigma-backend-loki { };
 
   pysigma-pipeline-crowdstrike = callPackage ../development/python-modules/pysigma-pipeline-crowdstrike { };
 
@@ -17610,6 +17621,8 @@ self: super: with self; {
 
   types-futures = callPackage ../development/python-modules/types-futures { };
 
+  types-greenlet = callPackage ../development/python-modules/types-greenlet { };
+
   types-html5lib = callPackage ../development/python-modules/types-html5lib { };
 
   types-ipaddress = callPackage ../development/python-modules/types-ipaddress { };
@@ -18715,6 +18728,8 @@ self: super: with self; {
   zconfig = callPackage ../development/python-modules/zconfig { };
 
   zdaemon = callPackage ../development/python-modules/zdaemon { };
+
+  zebrafy = callPackage ../development/python-modules/zebrafy { };
 
   zeek = (toPythonModule (pkgs.zeek.broker.override {
     python3 = python;
