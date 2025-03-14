@@ -64,10 +64,10 @@ in
     systemd.defaultUnit = lib.mkIf (xcfg.autorun || dmcfg.enable) "graphical.target";
 
     xdg = {
-      autostart.enable = true;
-      menus.enable = true;
-      mime.enable = true;
-      icons.enable = true;
+      autostart.enable = lib.mkDefault true;
+      menus.enable = lib.mkDefault true;
+      mime.enable = lib.mkDefault true;
+      icons.enable = lib.mkDefault true;
     };
   };
 }
