@@ -41,6 +41,7 @@
   plasma-activities = callPackage ./plasma-activities { };
   plasma-activities-stats = callPackage ./plasma-activities-stats { };
   plasma-browser-integration = callPackage ./plasma-browser-integration { };
+  plasma-bigscreen = callPackage ./plasma-bigscreen { };
   plasma-desktop = callPackage ./plasma-desktop { };
   plasma-dialer = callPackage ./plasma-dialer { };
   plasma-disks = callPackage ./plasma-disks { };
