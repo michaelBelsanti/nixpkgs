@@ -4156,6 +4156,8 @@ self: super: with self; {
 
   django-treebeard = callPackage ../development/python-modules/django-treebeard { };
 
+  django-treenode = callPackage ../development/python-modules/django-treenode { };
+
   django-two-factor-auth = callPackage ../development/python-modules/django-two-factor-auth { };
 
   django-types = callPackage ../development/python-modules/django-types { };
@@ -10587,6 +10589,8 @@ self: super: with self; {
   nix-kernel = callPackage ../development/python-modules/nix-kernel { inherit (pkgs) nix; };
 
   nix-prefetch-github = callPackage ../development/python-modules/nix-prefetch-github { };
+
+  nixpkgs-plugin-update = callPackage ../development/python-modules/nixpkgs-plugin-update { };
 
   nixpkgs-pytools = callPackage ../development/python-modules/nixpkgs-pytools { };
 
