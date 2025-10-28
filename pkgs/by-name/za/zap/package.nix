@@ -21,11 +21,21 @@ stdenv.mkDerivation (finalAttrs: {
       name = "zap";
       exec = "zap";
       icon = "zap";
-      desktopName = "Zed Attack Proxy";
+      desktopName = "ZAP";
       categories = [
         "Development"
         "Security"
         "System"
+      ];
+      keywords = [
+        "network"
+        "scan"
+        "scanner"
+        "web"
+        "security"
+        "zed"
+        "attack"
+        "proxy"
       ];
     })
   ];
@@ -45,6 +55,7 @@ stdenv.mkDerivation (finalAttrs: {
     mkdir -p $out/{bin,share}
 
     cp -pR . "$out/share/zap/"
+    install -Dm644 zap.ico "$out/share/icons/hicolor/256x256/apps/zap.ico"
 
     cat >> "$out/bin/zap" << EOF
     #!${runtimeShell}
