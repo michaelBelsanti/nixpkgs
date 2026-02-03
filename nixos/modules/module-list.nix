@@ -860,6 +860,7 @@
   ./services/misc/etesync-dav.nix
   ./services/misc/evdevremapkeys.nix
   ./services/misc/evremap.nix
+  ./services/misc/falcond.nix
   ./services/misc/felix.nix
   ./services/misc/flaresolverr.nix
   ./services/misc/forgejo.nix
